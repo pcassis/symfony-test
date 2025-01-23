@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Controller;
+
+use App\Model\AddressQuery;
+use App\Service\ShipXDataProvider;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+
+final class PointSearchController extends AbstractController
+{
+	#[Route('/point/search', name: 'app_point_search')]
+	public function index(
+		Request $request,
+		ShipXDataProvider $provider,
+	): Response
+	{
+		$query = new AddressQuery();
+		$form = $this->createFormBuilder($query)
+			->add( 'street', TextType::class, ['required' => false])
+			->add( 'postcode', TextType::class, ['required' => false])
+			->add( 'city', TextType::class)
+			->add('save', SubmitType::class, ['label' => 'Search'])
+			->getForm();
+
+		$form->handleRequest( $request);
+
+		return $this->render( 'point-search.html.twig', [
+			'form' => $form,
+		]);
+	}
+}
