@@ -9,6 +9,7 @@
         "ext-iconv": "*",
         "phpdocumentor/reflection-docblock": "^5.6",
         "phpstan/phpdoc-parser": "^2.0",
+        "sirvoy/twig-bulma-form-theme-bundle": "dev-master",
         "symfony/console": "6.4.*",
         "symfony/dotenv": "6.4.*",
         "symfony/flex": "^2",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da587e99f52b19a352bd5941bb9e3db1",
+    "content-hash": "4e841caea12eafd4f58576ab8b8c5c35",
     "packages": [
         {
             "name": "doctrine/deprecations",
@@ -474,6 +474,49 @@
                 "source": "https://github.com/php-fig/log/tree/3.0.2"
             },
             "time": "2024-09-11T13:17:53+00:00"
+        },
+        {
+            "name": "sirvoy/twig-bulma-form-theme-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dsmink/twig-bulma-form-theme-bundle.git",
+                "reference": "f0346dd0926d004e739fe71ac3a28bef1fa670dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dsmink/twig-bulma-form-theme-bundle/zipball/f0346dd0926d004e739fe71ac3a28bef1fa670dd",
+                "reference": "f0346dd0926d004e739fe71ac3a28bef1fa670dd",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dennis Smink",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Alexander Jordan",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Twig Form Theme for Bulma for use with Symfony",
+            "keywords": [
+                "bulma",
+                "symfony",
+                "theme",
+                "twig"
+            ],
+            "support": {
+                "issues": "https://github.com/dsmink/twig-bulma-form-theme-bundle/issues",
+                "source": "https://github.com/sirvoy/twig-bulma-form-theme-bundle"
+            },
+            "time": "2023-05-18T11:30:21+00:00"
         },
         {
             "name": "symfony/cache",
@@ -6210,7 +6253,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "sirvoy/twig-bulma-form-theme-bundle": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
