@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model;
 
 use App\Validator\OptionalIfOtherFieldIsBlank;
@@ -8,14 +9,18 @@ class AddressQuery
 {
 	public function __construct(
 		#[Assert\Length(min: 3, max: 64)]
-		private string $city = '',
+		private string  $city = '',
+
 		#[
 			Assert\Regex(pattern: '/^\d{2}-\d{3}$/'),
 			OptionalIfOtherFieldIsBlank(field: 'street')
 		]
 		private ?string $postcode = null,
+
 		#[Assert\Length(min: 3, max: 64)]
 		private ?string $street = null,
+
+		private ?string $name = null,
 	)
 	{}
 
@@ -49,5 +54,13 @@ class AddressQuery
 		$this->street = $street;
 	}
 
+	public function getName(): ?string
+	{
+		return $this->name;
+	}
 
+	public function setName( ?string $name ): void
+	{
+		$this->name = $name;
+	}
 }
