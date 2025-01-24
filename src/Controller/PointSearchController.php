@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Model\AddressQuery;
 use App\Service\ShipXDataProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,12 +21,18 @@ final class PointSearchController extends AbstractController
 	): Response
 	{
 		$query = new AddressQuery();
-		$form = $this->createFormBuilder($query)
+		$formBuilder = $this->createFormBuilder($query)
 			->add( 'street', TextType::class, ['required' => false])
 			->add( 'postcode', TextType::class, ['required' => false])
 			->add( 'city', TextType::class)
-			->add('save', SubmitType::class, ['label' => 'Search'])
-			->getForm();
+			->add('save', SubmitType::class, ['label' => 'Search']);
+
+		$formBuilder->get( 'city')->addModelTransformer( new CallbackTransformer(
+			fn($value) => $value,
+			fn($value) => mb_convert_case( $value, MB_CASE_TITLE),
+		));
+
+		$form = $formBuilder->getForm();
 
 		$form->handleRequest( $request);
 
