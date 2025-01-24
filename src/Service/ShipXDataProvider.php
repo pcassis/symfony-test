@@ -14,6 +14,10 @@ class ShipXDataProvider
 	private string $baseUrl = 'https://api-shipx-pl.easypack24.net/v1/';
 	private string $url;
 
+	private array $typesMap = [
+		self::RESOURCE_POINTS => Points::class,
+	];
+
 	public function __construct(
 		private readonly SerializerInterface $serializer,
 		private readonly HttpClientInterface $client,
@@ -22,11 +26,15 @@ class ShipXDataProvider
 
 	public function getData( string $resourceName, array $params): Points
 	{
+		if (!isset( $this->typesMap[$resourceName])) {
+			throw new \InvalidArgumentException( 'Unknown resource name "'.$resourceName.'"');
+		}
+
 		$this->url = $this->getUrl( $resourceName, $params);
 
 		$content = ($this->cache) ? $this->cache->get( $this->url, $this->fetchContent(...)) : $this->fetchContent();
 
-		return $this->serializer->deserialize( $content, Points::class, 'json' );
+		return $this->serializer->deserialize( $content, $this->typesMap[$resourceName], 'json' );
 	}
 
 	private function getUrl( string $resourceName, array $params): string
