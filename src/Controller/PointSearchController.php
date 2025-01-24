@@ -33,11 +33,22 @@ final class PointSearchController extends AbstractController
 		));
 
 		$form = $formBuilder->getForm();
+		$viewParams = [
+			'form' => $form,
+		];
 
 		$form->handleRequest( $request);
 
-		return $this->render( 'point-search.html.twig', [
-			'form' => $form,
-		]);
+		if ($form->isSubmitted() && $form->isValid()) {
+			/** @var AddressQuery $data */
+			$data = $form->getData();
+
+			$viewParams['points'] = $provider->getData(
+				ShipXDataProvider::RESOURCE_POINTS,
+				['city' => $data->getCity()]
+			);
+		}
+
+		return $this->render( 'point-search.html.twig', $viewParams);
 	}
 }

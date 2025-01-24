@@ -2,5 +2,13 @@
 
 {% block body %}
 	{{ form(form) }}
-{% endblock %}
 
+	{% if points is defined %}
+		<p>Liczba punktów: {{ points.count }}</p>
+		<ul>
+		{% for item in points.items %}
+			<li>{{ item.name }} {{ item.address.line1 }} {{ item.address.line2 }}</li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+{% endblock %}
